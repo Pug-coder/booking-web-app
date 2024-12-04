@@ -19,16 +19,15 @@ public class UserController {
     @GetMapping(path="/add")
     public String showAddUserForm(Model model) {
         model.addAttribute("user", new User());
-        return "add-user"; // Шаблон add-user.html
+        return "add-user";
     }
 
     @PostMapping(path="/add")
     public String addNewUser(@RequestParam String firstName, @RequestParam String lastName) {
         User n = new User();
-        n.setFirstName(firstName);
-        n.setLastName(lastName);
+
         userRepository.save(n);
-        return "redirect:/users/all"; // Возврат шаблона add-user.html
+        return "redirect:/users/all";
     }
 
     @GetMapping(path="/all")
