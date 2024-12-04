@@ -15,17 +15,9 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-        validateUser(user);
+
         return userRepository.save(user);
     }
 
-    public void validateUser(User user) {
-        if (user.getFirstName() == null || user.getFirstName().isEmpty()) {
-            throw new BadNameException("firstName", "First name cannot be empty");
-        }
 
-        if (user.getLastName() == null || user.getLastName().isEmpty()) {
-            throw new BadNameException("lastName", "Last name cannot be empty");
-        }
-    }
 }

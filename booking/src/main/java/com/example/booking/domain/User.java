@@ -3,6 +3,7 @@ package com.example.booking.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -11,19 +12,40 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-        @Column(name = "firstName", nullable = false)
-        @NotBlank(message =  "First name cannot be empty")
-    private String firstName;
+    private String username;
+    private String password;
 
-    @Column(name = "lastName", nullable = false)
-    @NotBlank(message =  "Last name cannot be empty")
-    private String lastName;
-
+    @ElementCollection(targetClass = Role.class, fetch=FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name= "user_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_name")
+    private Set<Role> roles;
     public User() {}
 
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public Integer getId() {
@@ -34,19 +56,5 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 }
