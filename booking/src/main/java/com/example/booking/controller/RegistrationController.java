@@ -25,7 +25,7 @@ public class RegistrationController {
         User userFromDb = userRepository.findByUsername(user.getUsername());
 
         if (userFromDb != null) {
-            model.addAttribute("message", "Usr created");
+            model.addAttribute("message", "Usr exists");
             return "registration";
         }
 
