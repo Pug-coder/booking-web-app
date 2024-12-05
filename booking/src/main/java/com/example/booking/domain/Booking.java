@@ -23,7 +23,7 @@ public class Booking {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "room_id")
     private Room room;  // Связь с Room
 
@@ -37,10 +37,11 @@ public class Booking {
 
     public Booking() {}
 
-    public  Booking(LocalDateTime startTime, LocalDateTime endTime, User user) {
+    public Booking(LocalDateTime startTime, LocalDateTime endTime, User user, Room room) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.user = user;
+        this.room = room;
     }
 
     public Integer getId() {
@@ -70,5 +71,4 @@ public class Booking {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-    //TODO: сделать валидаторы
 }
